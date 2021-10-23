@@ -1,4 +1,5 @@
 import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@mui/material";
+import PropTypes from 'prop-types';
 
 const Breed = ({name, srcImage})=> {
     return (
@@ -19,5 +20,10 @@ const Breed = ({name, srcImage})=> {
         </Card>
     );
 };
+
+Breed.propTypes = {
+    name: PropTypes.string.isRequired,
+    srcImage: PropTypes.string.isRequired
+}
 
 export default Breed;

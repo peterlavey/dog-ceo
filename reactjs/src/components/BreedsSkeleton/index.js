@@ -5,7 +5,7 @@ const BreedsSkeleton = ()=> {
         <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center">
             {
                 [...Array(50).keys()].map((el)=> (
-                    <Grid item xs={3} key={`skeleton-${el}`}>
+                    <Grid item xs={12} sm={6} md={4} lg={3} key={`skeleton-${el}`}>
                         <Card>
                             <CardActionArea>
                                 <Skeleton variant="rectangular" height={140} />

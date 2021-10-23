@@ -1,4 +1,5 @@
 import {Chip} from "@mui/material";
+import PropTypes from "prop-types";
 
 const Filters = ({filters, remove})=> {
     return (
@@ -17,5 +18,10 @@ const Filters = ({filters, remove})=> {
         </div>
     );
 };
+
+Filters.propTypes = {
+    filters: PropTypes.arrayOf(PropTypes.string),
+    remove: PropTypes.func
+}
 
 export default Filters;
