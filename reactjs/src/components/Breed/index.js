@@ -1,10 +1,23 @@
-const Breed = ({key, name, srcImage})=> {
+import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@mui/material";
+
+const Breed = ({name, srcImage})=> {
     return (
-        <div key={key}>
-            <p>{name}</p>
-            <img src={srcImage} alt={name}/>
-        </div>
-    )
-}
+        <Card>
+            <CardActionArea>
+                <CardMedia
+                    component="img"
+                    height="140"
+                    image={srcImage}
+                    alt={name}
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        {name}
+                    </Typography>
+                </CardContent>
+            </CardActionArea>
+        </Card>
+    );
+};
 
 export default Breed;

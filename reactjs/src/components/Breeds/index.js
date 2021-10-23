@@ -1,12 +1,17 @@
 import Breed from "../Breed";
+import {Grid} from "@mui/material";
 
 const Breeds = ({breeds})=> {
     return (
-        <div>
+        <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center">
             {
-                breeds.map((breed)=> <Breed {...breed}/>)
+                breeds.map((breed, index)=> (
+                    <Grid item xs={3} key={`${breed}-${index}`}>
+                        <Breed {...breed}/>
+                    </Grid>
+                ))
             }
-        </div>
+        </Grid>
     )
 };
 
