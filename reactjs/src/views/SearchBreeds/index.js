@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {GETBreedsImages} from "../../services";
 import Breeds from "../../components/Breeds";
-import {TextField} from "@mui/material";
+import {Box, TextField} from "@mui/material";
 import Filters from "../../components/Filters";
 import BreedsSkeleton from "../../components/BreedsSkeleton";
 import Switch from "../../components/Switch";
@@ -24,23 +24,16 @@ const SearchBreeds = ()=> {
 
     const loadBreeds = async ()=> {
         const _breeds = await GETBreedsImages();
-        setBreeds(_breeds);
         setFilteredBreeds(_breeds);
-        setCurrentState(STATE.MATCHES_FOUND);
+        setBreeds(_breeds);
     };
 
     const filterBreeds = ()=> {
         if(filters.length) {
             const _filteredBreeds = breeds.filter((breed)=> filters.some((filter)=> breed.name.includes(filter)));
             setFilteredBreeds(_filteredBreeds);
-            if(_filteredBreeds.length) {
-                setCurrentState(STATE.MATCHES_FOUND);
-            } else {
-                setCurrentState(STATE.NO_MATCHES);
-            }
         } else {
             setFilteredBreeds(breeds);
-            setCurrentState(STATE.MATCHES_FOUND);
         }
     };
 
@@ -76,22 +69,36 @@ const SearchBreeds = ()=> {
         filterBreeds();
     }, [filters]);
 
+    useEffect(()=> {
+        if(breeds.length) {
+            if(filteredBreeds.length) {
+                setCurrentState(STATE.MATCHES_FOUND);
+            } else {
+                setCurrentState(STATE.NO_MATCHES)
+            }
+        } else {
+            setCurrentState(STATE.LOADING);
+        }
+    }, [breeds, filteredBreeds]);
+
     return (
         <div className="App">
-            <TextField
-                fullWidth
-                autoComplete={""}
-                autoFocus
-                id="standard-search"
-                label="Breed filter"
-                type="search"
-                variant="standard"
-                margin="dense"
-                value={filter}
-                onChange={handleChange}
-                onKeyDown={onPressEnter}
-            />
-            <Filters filters={filters} remove={removeFilter}/>
+            <Box component={"div"} sx={{ mb: 5 }}>
+                <TextField
+                    fullWidth
+                    autoComplete={""}
+                    autoFocus
+                    id="standard-search"
+                    label="Breed filter"
+                    type="search"
+                    variant="standard"
+                    margin="dense"
+                    value={filter}
+                    onChange={handleChange}
+                    onKeyDown={onPressEnter}
+                />
+                <Filters filters={filters} remove={removeFilter}/>
+            </Box>
 
             <Switch value={currentState}>
                 <Case type={STATE.LOADING}>
