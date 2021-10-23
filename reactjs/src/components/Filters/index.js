@@ -4,8 +4,14 @@ const Filters = ({filters, remove})=> {
     return (
         <div>
             {
-                filters.map((filter)=> (
-                    <Chip label={filter} variant="outlined" onDelete={()=> remove(filter)} />
+                filters.map((filter, index)=> (
+                    <Chip
+                        key={`${filter}-${index}`}
+                        label={filter}
+                        variant="outlined"
+                        onDelete={()=> remove(filter)}
+                        sx={{ mx: .5, mb: 1 }}
+                    />
                 ))
             }
         </div>

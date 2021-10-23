@@ -6,7 +6,7 @@ const Breeds = ({breeds})=> {
         <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center">
             {
                 breeds.map((breed, index)=> (
-                    <Grid item xs={3} key={`${breed}-${index}`}>
+                    <Grid item xs={3} key={`${breed.name}-${index}`}>
                         <Breed {...breed}/>
                     </Grid>
                 ))

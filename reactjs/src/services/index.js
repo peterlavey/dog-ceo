@@ -15,19 +15,28 @@ export const GETBreedsImages = async ()=> {
     const subBreedImagesObj = {};
     subBreedsNames.forEach((subBreed, index)=> subBreedImagesObj[subBreed] = subBreedImages[index]);
 
-    return breedNames.map((breed, index)=> {
+    const breeds = breedNames.map((breed, index)=> {
         return {
             name: breed,
             srcImage: breedImages[index],
-            subBreed: breedsObject[breed].map((subBreed)=> {
-                return {
-                    name: subBreed,
-                    srcImage: subBreedImagesObj[subBreed]
-                }
-            })
         }
     });
+
+    const subBreeds = breedNames.filter((breed)=> breedsObject[breed].length).flatMap((breed, index)=> {
+        return breedsObject[breed].map((subBreed)=> {
+            return {
+                name: `${breed} ${subBreed}`,
+                srcImage: subBreedImagesObj[subBreed]
+            }
+        });
+    });
+
+    return [...breeds, ...subBreeds].sort(sortAscBy("name"));
 };
+
+const sortAscBy = (prop)=> {
+    return (a,b) => (a[prop] > b[prop]) ? 1 : ((b[prop] > a[prop]) ? -1 : 0)
+}
 
 const GETBreeds = ()=> {
     return axios.get('https://dog.ceo/api/breeds/list/all').then((res)=> res.data.message);
