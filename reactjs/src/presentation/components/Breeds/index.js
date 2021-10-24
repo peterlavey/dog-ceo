@@ -1,6 +1,7 @@
 import Breed from "../Breed";
 import {Grid} from "@mui/material";
 import PropTypes from "prop-types";
+import {BreedPropType} from "../../../domain/entity/Breed";
 
 const Breeds = ({breeds})=> {
     return (
@@ -17,10 +18,7 @@ const Breeds = ({breeds})=> {
 };
 
 Breeds.propTypes = {
-    breeds: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        srcImage: PropTypes.string.isRequired
-    }))
+    breeds: PropTypes.arrayOf(PropTypes.shape(BreedPropType))
 }
 
 export default Breeds;

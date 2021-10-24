@@ -1,5 +1,5 @@
 import './App.css';
-import SearchBreeds from "./views/SearchBreeds";
+import SearchBreeds from "./presentation/views/SearchBreeds";
 
 function App() {
   return (

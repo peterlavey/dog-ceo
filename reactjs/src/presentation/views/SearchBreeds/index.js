@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import {GETBreedsImages} from "../../services";
 import Breeds from "../../components/Breeds";
 import {Box, TextField} from "@mui/material";
 import Filters from "../../components/Filters";
@@ -7,7 +6,7 @@ import BreedsSkeleton from "../../components/BreedsSkeleton";
 import Switch from "../../components/Switch";
 import Case from "../../components/Switch/Case";
 import NoMatches from "../../components/NoMatches";
-
+import {getBreeds} from "../../../domain/useCase/breedUseCase";
 
 const STATE = {
     LOADING: "LOADING",
@@ -23,7 +22,7 @@ const SearchBreeds = ()=> {
     const [filteredBreeds, setFilteredBreeds] = useState([]);
 
     const loadBreeds = async ()=> {
-        const _breeds = await GETBreedsImages();
+        const _breeds = await getBreeds();
         setFilteredBreeds(_breeds);
         setBreeds(_breeds);
     };
