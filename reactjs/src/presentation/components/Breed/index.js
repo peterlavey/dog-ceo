@@ -1,7 +1,7 @@
 import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@mui/material";
-import {BreedPropType} from "../../../domain/entity/Breed";
+import {BreedModelPropType} from "../../models/breedModel";
 
-const Breed = ({name, srcImage})=> {
+const Breed = ({displayName, name, srcImage})=> {
     return (
         <Card>
             <CardActionArea>
@@ -13,7 +13,7 @@ const Breed = ({name, srcImage})=> {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        {name}
+                        {displayName}
                     </Typography>
                 </CardContent>
             </CardActionArea>
@@ -21,6 +21,6 @@ const Breed = ({name, srcImage})=> {
     );
 };
 
-Breed.propTypes = BreedPropType;
+Breed.propTypes = BreedModelPropType;
 
 export default Breed;

@@ -20,7 +20,6 @@ describe('When FilterInput is instantiated', ()=> {
     });
 
     it('shows value passed by prop', ()=> {
-        console.log(component)
         expect(input().prop('value')).toBe(initialState.value);
     });
 

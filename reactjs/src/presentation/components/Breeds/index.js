@@ -1,7 +1,7 @@
 import Breed from "../Breed";
 import {Grid} from "@mui/material";
 import PropTypes from "prop-types";
-import {BreedPropType} from "../../../domain/entity/Breed";
+import {BreedModelPropType} from "../../models/breedModel";
 
 const Breeds = ({breeds})=> {
     return (
@@ -18,7 +18,7 @@ const Breeds = ({breeds})=> {
 };
 
 Breeds.propTypes = {
-    breeds: PropTypes.arrayOf(PropTypes.shape(BreedPropType))
+    breeds: PropTypes.arrayOf(PropTypes.shape(BreedModelPropType))
 }
 
 export default Breeds;

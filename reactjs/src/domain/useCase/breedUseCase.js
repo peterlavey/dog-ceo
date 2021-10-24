@@ -1,3 +1,10 @@
-import {getBreeds as getBreedsRepository} from "../../data/repository/breedRepository";
+const BreedUseCase = (BreedRepository, BreedsToSearchBreedsViewModel)=> {
+    return {
+        getBreeds: async ()=> {
+            const breeds = await BreedRepository.getBreeds();
+            return BreedsToSearchBreedsViewModel.map(breeds);
+        }
+    }
+};
 
-export const getBreeds = ()=> getBreedsRepository();
+export default BreedUseCase;

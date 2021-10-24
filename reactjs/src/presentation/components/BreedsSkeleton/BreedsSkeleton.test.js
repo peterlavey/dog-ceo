@@ -1,4 +1,4 @@
-import {render} from "enzyme";
+import {shallow} from "enzyme";
 import BreedsSkeleton from "./index";
 
 const initialState = {
@@ -7,10 +7,10 @@ const initialState = {
 
 describe('When BreedsSkeleton is instantiated', ()=> {
     let component;
-    let skeletonCards = ()=> component.find('.MuiGrid-item');
+    let skeletonCards = ()=> component.find('ForwardRef(Card)');
 
     beforeAll(()=> {
-        component = render(<BreedsSkeleton {...initialState}/>);
+        component = shallow(<BreedsSkeleton {...initialState}/>);
     });
 
     it('shows quantity of items passed by prop', ()=> {

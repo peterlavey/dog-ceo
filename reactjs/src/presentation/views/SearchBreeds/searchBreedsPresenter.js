@@ -1,10 +1,9 @@
 import SearchBreeds from "./searchBreedsView";
 import {useEffect, useState} from "react";
-import {getBreeds} from "../../../domain/useCase/breedUseCase";
 import {STATE} from "./states";
 
 
-const SearchBreedsPresenter = ()=> {
+const SearchBreedsPresenter = ({useCase})=> {
     const [currentState, setCurrentState] = useState(STATE.LOADING);
     const [filter, setFilter] = useState('');
     const [filters, setFilters] = useState([]);
@@ -12,9 +11,9 @@ const SearchBreedsPresenter = ()=> {
     const [filteredBreeds, setFilteredBreeds] = useState([]);
 
     const loadBreeds = async ()=> {
-        const _breeds = await getBreeds();
-        setFilteredBreeds(_breeds);
-        setBreeds(_breeds);
+        const breedViewModel = await useCase.getBreeds();
+        setFilteredBreeds(breedViewModel.breeds);
+        setBreeds(breedViewModel.breeds);
     };
 
     const filterBreeds = ()=> {

@@ -1,18 +1,21 @@
-import {render} from "enzyme";
+import {shallow} from "enzyme";
 import Breeds from "./index";
 
 const initialState = {
     breeds: [
         {
-            name: "Breed 1",
+            displayName: "Breed 1",
+            name: "breed 1",
             srcImage: "http://test1.png"
         },
         {
-            name: "Breed 2",
+            displayName: "Breed 2",
+            name: "breed 2",
             srcImage: "http://test2.png"
         },
         {
-            name: "Breed 3",
+            displayName: "Breed 3",
+            name: "breed 3",
             srcImage: "http://test3.png"
         }
     ]
@@ -20,10 +23,10 @@ const initialState = {
 
 describe('When Breeds is instantiated', ()=> {
     let component;
-    let breedCards = ()=> component.find('.MuiGrid-item');
+    let breedCards = ()=> component.find('Breed');
 
     beforeAll(()=> {
-        component = render(<Breeds {...initialState}/>);
+        component = shallow(<Breeds {...initialState}/>);
     });
 
     it('show three items', ()=> {

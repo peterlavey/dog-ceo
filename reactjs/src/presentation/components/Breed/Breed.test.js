@@ -1,25 +1,26 @@
 import Breed from "./index";
-import {mount} from "enzyme";
+import {shallow} from "enzyme";
 
 const initialState = {
-    name: "Name Test",
+    displayName: "Name Test",
+    name: "name test",
     srcImage: "http://test.png"
 };
 
 describe('When Breed is instantiated', ()=> {
     let component;
-    let textName = ()=> component.find('.MuiTypography-h5').at(0);
-    let img = ()=> component.find('img');
+    let textName = ()=> component.find('ForwardRef(Typography)');
+    let img = ()=> component.find('ForwardRef(CardMedia)');
 
     beforeAll(()=> {
-        component = mount(<Breed {...initialState}/>);
+        component = shallow(<Breed {...initialState}/>);
     });
 
     it('shows name passed by prop', ()=> {
-        expect(textName().text()).toBe(initialState.name);
+        expect(textName().text()).toBe(initialState.displayName);
     });
 
     it('shows image source passed by prop', ()=> {
-        expect(img().prop('src')).toBe(initialState.srcImage);
+        expect(img().prop('image')).toBe(initialState.srcImage);
     });
 });
