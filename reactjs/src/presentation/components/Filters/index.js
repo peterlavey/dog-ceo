@@ -1,7 +1,7 @@
 import {Chip} from "@mui/material";
 import PropTypes from "prop-types";
 
-const Filters = ({filters, remove})=> {
+const Filters = ({filters, onRemove})=> {
     return (
         <div>
             {
@@ -10,7 +10,7 @@ const Filters = ({filters, remove})=> {
                         key={`${filter}-${index}`}
                         label={filter}
                         variant="outlined"
-                        onDelete={()=> remove(filter)}
+                        onDelete={()=> onRemove(filter)}
                         sx={{ mx: .5, mb: 1 }}
                     />
                 ))
@@ -21,7 +21,7 @@ const Filters = ({filters, remove})=> {
 
 Filters.propTypes = {
     filters: PropTypes.arrayOf(PropTypes.string),
-    remove: PropTypes.func
+    onRemove: PropTypes.func
 }
 
 export default Filters;

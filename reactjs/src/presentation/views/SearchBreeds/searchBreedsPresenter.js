@@ -1,20 +1,10 @@
+import SearchBreeds from "./searchBreedsView";
 import {useEffect, useState} from "react";
-import Breeds from "../../components/Breeds";
-import {Box, TextField} from "@mui/material";
-import Filters from "../../components/Filters";
-import BreedsSkeleton from "../../components/BreedsSkeleton";
-import Switch from "../../components/Switch";
-import Case from "../../components/Switch/Case";
-import NoMatches from "../../components/NoMatches";
 import {getBreeds} from "../../../domain/useCase/breedUseCase";
+import {STATE} from "./states";
 
-const STATE = {
-    LOADING: "LOADING",
-    MATCHES_FOUND: "MATCHES_FOUND",
-    NO_MATCHES: "NO_MATCHES"
-};
 
-const SearchBreeds = ()=> {
+const SearchBreedsPresenter = ()=> {
     const [currentState, setCurrentState] = useState(STATE.LOADING);
     const [filter, setFilter] = useState('');
     const [filters, setFilters] = useState([]);
@@ -48,12 +38,6 @@ const SearchBreeds = ()=> {
             _filters.splice(index, 1)
             setFilters(_filters);
         }
-    }
-
-    const onPressEnter = ({key})=> {
-        if (key === 'Enter') {
-            addFilter();
-        }
     };
 
     const handleChange = ({target})=> {
@@ -81,37 +65,16 @@ const SearchBreeds = ()=> {
     }, [breeds, filteredBreeds]);
 
     return (
-        <div className="App">
-            <Box component={"div"} sx={{ mb: 5 }}>
-                <TextField
-                    fullWidth
-                    autoComplete={""}
-                    autoFocus
-                    id="standard-search"
-                    label="Breed filter"
-                    type="search"
-                    variant="standard"
-                    margin="dense"
-                    value={filter}
-                    onChange={handleChange}
-                    onKeyDown={onPressEnter}
-                />
-                <Filters filters={filters} remove={removeFilter}/>
-            </Box>
-
-            <Switch value={currentState}>
-                <Case type={STATE.LOADING}>
-                    <BreedsSkeleton/>
-                </Case>
-                <Case type={STATE.MATCHES_FOUND}>
-                    <Breeds breeds={filteredBreeds}/>
-                </Case>
-                <Case type={STATE.NO_MATCHES}>
-                    <NoMatches/>
-                </Case>
-            </Switch>
-        </div>
+        <SearchBreeds
+            currentState={currentState}
+            filter={filter}
+            filters={filters}
+            filteredBreeds={filteredBreeds}
+            handleChange={handleChange}
+            addFilter={addFilter}
+            removeFilter={removeFilter}
+        />
     );
 };
 
-export default SearchBreeds;
+export default SearchBreedsPresenter;

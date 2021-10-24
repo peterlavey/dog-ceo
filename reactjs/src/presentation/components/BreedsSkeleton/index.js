@@ -1,10 +1,10 @@
 import {Card, CardActionArea, CardContent, Grid, Skeleton} from "@mui/material";
 
-const BreedsSkeleton = ()=> {
+const BreedsSkeleton = ({quantity})=> {
     return (
         <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center">
             {
-                [...Array(50).keys()].map((el)=> (
+                [...Array(quantity).keys()].map((el)=> (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={`skeleton-${el}`}>
                         <Card>
                             <CardActionArea>

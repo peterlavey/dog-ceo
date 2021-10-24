@@ -1,10 +1,10 @@
 import './App.css';
-import SearchBreeds from "./presentation/views/SearchBreeds";
+import SearchBreedsPresenter from "./presentation/views/SearchBreeds/searchBreedsPresenter";
 
 function App() {
   return (
     <div className="App">
-      <SearchBreeds/>
+      <SearchBreedsPresenter/>
     </div>
   );
 }
