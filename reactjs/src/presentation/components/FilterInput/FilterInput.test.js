@@ -3,12 +3,15 @@ import FilterInput from "./index";
 import {act} from "react-dom/test-utils";
 
 let handleChangeCalled = false;
+let onAddFilterCalled = false;
+
 const handleChange = ()=> handleChangeCalled = true;
+const onAddFilter = ()=> onAddFilterCalled = true;
 
 let initialState = {
     value: "poodle",
     handleChange,
-    onAddFilter: jest.fn()
+    onAddFilter
 };
 
 describe('When FilterInput is instantiated', ()=> {
@@ -39,5 +42,15 @@ describe('When FilterInput is instantiated', ()=> {
         it('calls handleChange method', ()=> {
             expect(handleChangeCalled).toBeTruthy();
         });
+
+        describe('and when enter key its pressed', ()=> {
+            beforeAll(()=> {
+                input().simulate('keydown', {key: 'Enter'});
+            });
+
+            it('calls onAddFilter method', ()=> {
+                expect(onAddFilterCalled).toBeTruthy();
+            });
+        })
     });
 });

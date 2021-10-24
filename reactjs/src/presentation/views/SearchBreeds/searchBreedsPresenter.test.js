@@ -6,7 +6,7 @@ import {act} from "react-dom/test-utils";
 
 
 const useCase = {
-    getBreeds: ()=> new Promise((resolve => resolve(getBreedsMock)))
+    getBreeds: ()=> Promise.resolve(getBreedsMock)
 };
 
 describe('When SearchBreedsPresenter is instantiated and its loading', ()=> {
@@ -22,23 +22,101 @@ describe('When SearchBreedsPresenter is instantiated and its loading', ()=> {
     });
 });
 
+jest.setTimeout(15000);
+
 describe('When SearchBreedsPresenter is instantiated and its started', ()=> {
     let presenter;
     const currentState = ()=> presenter.find('Switch').prop('value');
+    const filterInput = ()=> presenter.find('FilterInput input');
+    const filters = ()=> presenter.find('Filters ForwardRef(Chip)');
+    const removeFilterBtn = (index)=> filters().at(index).find('ForwardRef(CancelIcon)');
+    const breeds = ()=> presenter.find('Breed');
+    const noMatches = ()=> presenter.find('NoMatches h2');
 
-    it("asd", async ()=> {
-        presenter = mount(<SearchBreedsPresenter useCase={useCase}/>);
+    beforeAll( async ()=> {
         await act(async () => {
-            setTimeout(async ()=> {
-                await Promise.resolve(presenter);
-                await new Promise(resolve => setImmediate(resolve));
-                presenter.update();
-            }, 2000)
+            presenter = mount(<SearchBreedsPresenter useCase={useCase}/>);
         });
+
+        presenter.update();
     });
 
-    it('the current state its "LOADING"', ()=> {
-        expect(currentState()).toBe("LOADING")
+    it('the component its defined', ()=> {
+        expect(presenter).toBeDefined()
+    })
+
+    it('the current state its "MATCHES_FOUND"', ()=> {
+        expect(currentState()).toBe("MATCHES_FOUND")
+    });
+
+    it('shows breeds', ()=> {
+        expect(breeds().length).toBe(getBreedsMock.breeds.length);
+    });
+
+    describe('and when an existing breed its put like filter', ()=> {
+        beforeAll(()=> {
+            filterInput().simulate('change', {
+                target: {
+                    value: 'poodle'
+                }
+            });
+            filterInput().simulate('keydown', {key: 'Enter'});
+        });
+
+        it('shows the filter added', ()=> {
+            expect(filters().at(0).text()).toBe('poodle');
+        });
+
+        it('shows filtered breeds', ()=> {
+            expect(breeds().length).toBe(3);
+        });
+
+        describe('and when an unexisting breed its put like filter', ()=> {
+            beforeAll(()=> {
+                filterInput().simulate('change', {
+                    target: {
+                        value: 'unknown'
+                    }
+                });
+                filterInput().simulate('keydown', {key: 'Enter'});
+            });
+
+            it('shows previous filtered breeds', ()=> {
+                expect(breeds().length).toBe(3);
+            });
+
+            describe('and when the existing breed filter its removed', ()=> {
+                beforeAll(()=> {
+                    removeFilterBtn(0).simulate('click');
+                });
+
+                it('does not show breeds', ()=> {
+                    expect(breeds().length).toBe(0);
+                });
+
+                it('the current state its "NO_MATCHES"', ()=> {
+                    expect(currentState()).toBe("NO_MATCHES")
+                });
+
+                it('shows message "No matches found"', ()=> {
+                    expect(noMatches().text()).toBe('No matches found');
+                });
+
+                describe('and when the last filter its removed', ()=> {
+                    beforeAll(()=> {
+                        removeFilterBtn(0).simulate('click');
+                    });
+
+                    it('shows all the breeds again', ()=> {
+                        expect(breeds().length).toBe(getBreedsMock.breeds.length);
+                    });
+
+                    it('the current state its "MATCHES_FOUND"', ()=> {
+                        expect(currentState()).toBe("MATCHES_FOUND")
+                    });
+                });
+            });
+        });
     });
 });
 

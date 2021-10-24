@@ -33,10 +33,8 @@ const SearchBreedsPresenter = ({useCase})=> {
     const removeFilter = (_filter)=> {
         const _filters = [...filters];
         const index = _filters.indexOf(_filter)
-        if (index !== -1) {
-            _filters.splice(index, 1)
-            setFilters(_filters);
-        }
+        _filters.splice(index, 1)
+        setFilters(_filters);
     };
 
     const handleChange = ({target})=> {
