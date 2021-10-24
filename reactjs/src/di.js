@@ -1,7 +1,7 @@
 import BreedUseCase from "./domain/useCase/breedUseCase";
 import BreedRepository from "./data/repository/breedRepository";
 import BreedDataSource from "./data/dataSource/breedDataSource";
-import BreedsToSearchBreedsViewModel from "./domain/useCase/mappers/breedsToSearchBreedsViewModel";
+import BreedsToSearchBreedsViewModelMapper from "./domain/useCase/mappers/breedsToSearchBreedsViewModelMapper";
 import {request} from "./httpRequest";
 
 const DI = {
@@ -9,7 +9,7 @@ const DI = {
         BreedRepository(
             BreedDataSource(request)
         ),
-        BreedsToSearchBreedsViewModel
+        BreedsToSearchBreedsViewModelMapper
     )
 };
 
