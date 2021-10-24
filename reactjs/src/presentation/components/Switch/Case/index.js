@@ -6,7 +6,7 @@ const Case = ({type, value, onMatchFound, children})=> {
     const hasMatch = type === value;
     useEffect(()=> {
         if(hasMatch) onMatchFound();
-    }, []);
+    }, [hasMatch, onMatchFound]);
     return hasMatch ? <>{children}</> : <></>
 };
 

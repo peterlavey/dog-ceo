@@ -1,5 +1,5 @@
 import SearchBreeds from "./searchBreedsView";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {STATE} from "./states";
 
 
@@ -10,20 +10,20 @@ const SearchBreedsPresenter = ({useCase})=> {
     const [breeds, setBreeds] = useState([]);
     const [filteredBreeds, setFilteredBreeds] = useState([]);
 
-    const loadBreeds = async ()=> {
+    const loadBreeds = useCallback(async ()=> {
         const breedViewModel = await useCase.getBreeds();
         setFilteredBreeds(breedViewModel.breeds);
         setBreeds(breedViewModel.breeds);
-    };
+    }, [useCase]);
 
-    const filterBreeds = ()=> {
+    const filterBreeds = useCallback(()=> {
         if(filters.length) {
             const _filteredBreeds = breeds.filter((breed)=> filters.some((filter)=> breed.name.includes(filter)));
             setFilteredBreeds(_filteredBreeds);
         } else {
             setFilteredBreeds(breeds);
         }
-    };
+    }, [filters, breeds]);
 
     const addFilter = ()=> {
         setFilters([...filters, filter]);
@@ -43,11 +43,11 @@ const SearchBreedsPresenter = ({useCase})=> {
 
     useEffect(()=> {
         loadBreeds();
-    }, []);
+    }, [loadBreeds]);
 
     useEffect(()=> {
         filterBreeds();
-    }, [filters]);
+    }, [filters, filterBreeds]);
 
     useEffect(()=> {
         if(breeds.length) {
