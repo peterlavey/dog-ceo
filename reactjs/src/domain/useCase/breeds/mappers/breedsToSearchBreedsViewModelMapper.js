@@ -1,6 +1,6 @@
-import SearchBreedsViewModel from "../../../presentation/views/SearchBreeds/SearchBreedsViewModel";
-import BreedModel from "../../../presentation/models/breedModel";
-import {capitalize} from "../../../utils";
+import SearchBreedsViewModel from "../../../../presentation/views/SearchBreeds/SearchBreedsViewModel";
+import BreedModel from "../../../../presentation/models/breedModel";
+import {capitalize} from "../../../../utils";
 
 
 const breedToBreedModel = (breed)=> {

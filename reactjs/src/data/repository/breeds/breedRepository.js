@@ -1,5 +1,5 @@
-import {sortAscBy} from "../../utils";
-import Breed from "../../domain/entity/Breed";
+import {sortAscBy} from "../../../utils";
+import Breed from "../../../domain/entity/Breed";
 
 
 const BreedRepository = (BreedDataSource)=> {

@@ -1,6 +1,6 @@
 import './App.css';
 import SearchBreedsPresenter from "./presentation/views/SearchBreeds/searchBreedsPresenter";
-import DI from "./di";
+import DI from "./presentation/di/di";
 
 
 function App() {

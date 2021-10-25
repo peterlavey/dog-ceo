@@ -1,8 +1,8 @@
-import Breed from "../../domain/entity/Breed";
+import Breed from "../../entity/Breed";
 import BreedUseCase from "./breedUseCase";
 import BreedsToSearchBreedsViewModelMapper from "./mappers/breedsToSearchBreedsViewModelMapper";
-import BreedModel from "../../presentation/models/breedModel";
-import SearchBreedsViewModel from "../../presentation/views/SearchBreeds/SearchBreedsViewModel";
+import BreedModel from "../../../presentation/models/breedModel";
+import SearchBreedsViewModel from "../../../presentation/views/SearchBreeds/SearchBreedsViewModel";
 
 
 const repository = {

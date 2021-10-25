@@ -1,5 +1,5 @@
 import BreedRepository from "./breedRepository";
-import Breed from "../../domain/entity/Breed";
+import Breed from "../../../domain/entity/Breed";
 
 
 const dataSource = {
