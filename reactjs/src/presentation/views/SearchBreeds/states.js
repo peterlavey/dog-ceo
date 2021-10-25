@@ -1,0 +1,5 @@
+export const STATE = {
+    LOADING: "LOADING",
+    MATCHES_FOUND: "MATCHES_FOUND",
+    NO_MATCHES: "NO_MATCHES"
+};
